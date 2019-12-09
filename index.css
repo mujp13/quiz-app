@@ -1,0 +1,17 @@
+header {
+  display: flex;
+  justify-content: center;
+}
+
+section {
+  
+  display: flex;
+  flex-direction: column;
+  width:50%;
+  padding: 40px;
+  margin:0 auto;
+  background:rgba(66, 103, 206, 0.8);
+  border-radius: 10px;
+  
+}
+
