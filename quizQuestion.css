@@ -18,8 +18,8 @@ html {
 }
 
 .main-page {
-  
-  display: flex;
+  display: none;
+  /*display: flex;*/
   flex-direction: column;
   width:50%;
   padding: 40px;

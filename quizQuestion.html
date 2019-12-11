@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Medical Terminology">
-    <title>Quiz App</title>
+    <title>Quiz App: Quiz Question</title>
     <link rel="shortcut icon" href="#">
-    <link href="index.css" rel="stylesheet" type="text/css" />
+    <link href="quizQuestion.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <header>
@@ -27,10 +27,20 @@
           </div>
         </section>
         <form class="questionBox box altBox">
+            <div class="question">
+                <p><strong>Q1</strong>: Which of the following is the best aerosolized bronchodilator for a patient with an acute asthma attack?</p>
+                <label>
+                    <input type="radio" name="one" value="a">albuterol (proventil)</label>
+                <label>
+                    <input type="radio" name="one" value="b">ipratropium bromide (Atrovent)</label>
+                <label>
+                    <input type="radio" name="one" value="c">cromolyn sodium (Intal)</label>
+                <label>
+                    <input type="radio" name="one" value="d">budesonide/formoterol (Symbicort)</label>
+                <button type="submit" class="submitButton button"> Submit </button>
+            </div>
         </form>
     </main>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="store.js"></script>
-    <script src="index.js"></script>
+
   </body>
 </html>

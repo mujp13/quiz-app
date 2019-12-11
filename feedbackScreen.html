@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Medical Terminology">
+    <title>Quiz App: Feedback Screen Right or Wrong</title>
+    <link rel="shortcut icon" href="#">
+    <link href="feedbackScreen.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header>
+      <div class="top">
+        <div>
+          <h1>Web Respiratory Therapist Quiz Prep </h1>    
+          <ul>
+            <li class='board'><i>Question: <span class="question-number">0</span></i></li>
+            <li class='board'><i>Score: <span class="score">0</span></i></li>
+        </div>
+      </div>
+    </header>
+    <main>
+        <section class="main-page">
+          <p> This quiz is to help students to score better on respiratory therapy exams</p>
+          <div class="start">
+            <button type="button" id="start" class="startButton button">Start Quiz</button>
+          </div>
+        </section>
+        <form class="questionBox box altBox">
+            <div class="question">
+                <p><strong>Q1</strong>: Which of the following is the best aerosolized bronchodilator for a patient with an acute asthma attack?</p>
+                <label>
+                    <input type="radio" name="one" value="a">albuterol (proventil)</label>
+                    <p class="right-answer">You got it right!</p>
+                <label>
+                    <input type="radio" name="one" value="b">ipratropium bromide (Atrovent)</label>
+                    <p class="wrong-answer">You got it wrong! <br>The answer is "albuterol (proventil)"</br></p>
+                <label>
+                    <input type="radio" name="one" value="c">cromolyn sodium (Intal)</label>
+                <label>
+                    <input type="radio" name="one" value="d">budesonide/formoterol (Symbicort)</label>
+                <button type="submit" class="submitButton button"> Submit </button>
+            </div>
+        </form>
+    </main>
+
+  </body>
+</html>

@@ -18,8 +18,8 @@ html {
 }
 
 .main-page {
-  
-  display: flex;
+  display: none;
+  /*display: flex;*/
   flex-direction: column;
   width:50%;
   padding: 40px;
@@ -59,3 +59,24 @@ html {
   background:rgba(199, 211, 34, 0.8);
   border-radius: 10px;
 }
+
+.right-answer {
+  display: inline-block;
+  /*width: 80%;*/
+  background:ivory;
+  padding: 10px 20px;
+  margin: 5px 25px;
+  border: 3px solid forestgreen;
+  text-shadow: 0 0 3px forestgreen;
+ }
+ 
+ .wrong-answer {
+   display: inline-block;
+   /*width: 55%;*/
+   background:ivory;
+   padding: 10px 20px;
+   margin: 5px 25px;
+   border: 3px solid #fe0000;
+   text-shadow: 0 0 3px #fe0000;
+ }
+ 
