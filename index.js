@@ -12,24 +12,29 @@ function handleStartQuiz() {
 
 function renderQuestion() {
   
-  const num = 1;
+  let num = 1;
+  let currentQuestion = 0;
+  let answerNum = 0;
   const questionHtml = $(`
       <div class="question">
-          <p><strong>Q${num}</strong>: Which of the following is the best aerosolized bronchodilator for a patient with an acute asthma attack?</p>
+          <p><strong>Q${num}</strong>: ${STORE[currentQuestion].question}</p>
           <label>
-              <input type="radio" name="one" value="a">albuterol (proventil)</label>
+              <input type="radio" name="one" value="a">${STORE[currentQuestion].options[answerNum]}</label>
           <label>
-              <input type="radio" name="one" value="b">ipratropium bromide (Atrovent)</label>
+              <input type="radio" name="one" value="b">${STORE[currentQuestion].options[answerNum+1]}</label>
           <label>
-              <input type="radio" name="one" value="c">cromolyn sodium (Intal)</label>
+              <input type="radio" name="one" value="c">${STORE[currentQuestion].options[answerNum+2]}</label>
           <label>
-              <input type="radio" name="one" value="d">budesonide/formoterol (Symbicort)</label>
+              <input type="radio" name="one" value="d">${STORE[currentQuestion].options[answerNum+3]}</label>
           <button type="submit" class="submitButton button"> Submit </button>
       </div>
   `);
   
   $('.questionBox').html(questionHtml);
   updateQuestionScore();
+
+  
+
 }
 
 function updateQuestionScore() {
@@ -44,6 +49,10 @@ function generateQuestion() {
 function submitAnswer() {
   //user click the radio button to select answer.
   //store that in a variable
+  $('body').on("submit",'#js-questions', function(event) {
+    event.preventDefault();
+
+    let currentQ = STORE.questions[]
   
 }
 
@@ -63,7 +72,6 @@ function handleRestartQuiz() {
 
 function makeQuiz() {
   handleStartQuiz();
-  generateQuestion();
   submitAnswer();
   nextQuestion();
   handleRestartQuiz();
