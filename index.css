@@ -59,3 +59,7 @@ html {
   background:rgba(199, 211, 34, 0.8);
   border-radius: 10px;
 }
+
+input[type="submit"] {
+  margin-top: 10px;
+}
