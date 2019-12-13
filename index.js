@@ -2,6 +2,7 @@ let qNum = 1;
 let questNum =0;
 let index = 0;
 let result = 0;
+let score = 0;
 
 console.log(qNum);
 console.log(index);
@@ -19,10 +20,7 @@ function handleStartQuiz() {
 
 }
 
-function renderQuestion() {
-
-  
-  
+function renderQuestion() {  
   const questionHtml = $(`
       <div class="question">
           <p><strong>Q${qNum}</strong>: ${STORE[index].question}</p>
@@ -46,8 +44,6 @@ function renderQuestion() {
 
 }
 
-
-
 function handleAnswer() {
   $('.questionBox').on('click', '.submitButton', function(event) {
     event.preventDefault();
@@ -62,9 +58,12 @@ function handleAnswer() {
     }
     if(selected === correct) {
       $('input[name=choice]:checked').closest('label').append('<div class="right-answer">You got it right!</div>');
+      score++;
+      $('.score').text(`${score}/${qNum}`);
     }
     else {
       $('input[name=choice]:checked').closest('label').append(`<div class="wrong-answer">You got it wrong! <br>The answer is "${STORE[index].answer}"</br></div>`);
+      $('.score').text(`${score}/${qNum}`);
     }
     $('#answer').hide();
     $("input[type=radio]").attr('disabled', true);
@@ -76,7 +75,7 @@ function handleAnswer() {
 
 function handleNextQuestion() {
   $('.questionBox').on('click', '#next-question', function(event) {
-    if((index === STORE.length)) {
+    if((index === STORE.length - 1)) {
       //This means that the user tried all questions
       //Get the result page
       displayResults();
@@ -86,14 +85,22 @@ function handleNextQuestion() {
       index++;  
       renderQuestion();
     }
-
-    
   });
 }
 
 function displayResults() {
+  let grade = score/qNum * 100;
+  let resultText = 0;
+  if(grade >= 70) {
+    resultText = '<p style="color:green;"><b>You passed the quiz!</b></p>';
+  }
+  else {
+    resultText = '<p style="color:red;">You failed. Please retake the quiz!</p>'
+  }
+  
   let resultHtml = $(`<section class="result-page">
-    <p> Your score is 5/5 100%</p>
+    <p>Your score is: ${score}/${qNum} <b>${score/qNum*100}%</b></p>
+    ${resultText}
     <div class="result">
       <button type="button" id="restart" class="restartButton button">Restart Quiz</button>
     </div>  
@@ -102,9 +109,18 @@ function displayResults() {
 }
 
 function restartQuiz() {
-  $('main').on('click','#restart', function(event) {
+  $('.result').on('click', '.restartButton', function(event) {
+    resetVars();
     renderQuestion();
   });
+}
+
+function resetVars() {
+  qNum = 1;
+  questNum = 0;
+  index = 0;
+  result = 0;
+  score = 0;
 }
 
 function makeQuiz() {
@@ -112,7 +128,6 @@ function makeQuiz() {
   handleAnswer();
   handleNextQuestion();
   restartQuiz();
-
 }
 
 $(makeQuiz);

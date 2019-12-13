@@ -18,7 +18,7 @@ const STORE = [
         "morphine sulfate", 
         "oxycodone HCL (oxycotin)"
       ],
-      answer: "morphine sulfate"
+      answer: "lorazepam (Ativan)"
     },
 
     {
@@ -51,6 +51,6 @@ const STORE = [
         "palpate the patient's carotid pulse", 
         "obtaining an ABG"
       ],
-      answer: "obtaining an ABG"
+      answer: "palpate the patient's carotid pulse"
     }
 ];
