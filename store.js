@@ -52,5 +52,5 @@ const STORE = [
         "obtaining an ABG"
       ],
       answer: "obtaining an ABG"
-    },
+    }
 ];

@@ -1,3 +1,11 @@
+let qNum = 1;
+let index = 0;
+let result = 0;
+
+console.log(qNum);
+console.log(index);
+console.log(result);
+
 function handleStartQuiz() {
   //Create an event listener for clicking on "Start Quiz" button.
   //When user clicks it, the user will go to 1st question.
@@ -5,67 +13,50 @@ function handleStartQuiz() {
   $('.main-page').on('click', '.startButton', function(event) {
     $('.main-page').hide();
     renderQuestion();
-    updateQuestionNum();
   });
 
 }
 
 function renderQuestion() {
   
-  let num = 1;
-  let currentQuestion = 0;  
-
   const questionHtml = $(`
       <div class="question">
-          <p><strong>Q${num}</strong>: ${STORE[currentQuestion].question}</p>
+          <p><strong>Q${qNum}</strong>: ${STORE[index].question}</p>
           <label>
-              <input type="radio" name="choice" id="a" required>${STORE[currentQuestion].options[0]}</label>
+              <input type="radio" name="choice" id="a" required value="${STORE[index].options[0]}"> ${STORE[index].options[0]} </label>
           <label>
-              <input type="radio" name="choice" id="b">${STORE[currentQuestion].options[1]}</label>
+              <input type="radio" name="choice" id="b" value="${STORE[index].options[1]}"> ${STORE[index].options[1]} </label>
           <label>
-              <input type="radio" name="choice" id="c">${STORE[currentQuestion].options[2]}</label>
+              <input type="radio" name="choice" id="c" value="${STORE[index].options[2]}"> ${STORE[index].options[2]} </label>
           <label>
-              <input type="radio" name="choice" id="d">${STORE[currentQuestion].options[3]}</label>
+              <input type="radio" name="choice" id="d" value="${STORE[index].options[3]}"> ${STORE[index].options[3]} </label>
           <input type="button" value="submit" id="answer" class="submitButton button">
           <button type ="button" id="next-question" tabindex="6"> Next Q's</button>
       </div>
   `);
-  
-  $('.questionBox').html(questionHtml);
-  updateQuestionNum();
-  $("#next-question").hide();
-  currentQuestion++;
-  num++;
+   $('.questionBox').html(questionHtml);
+   $("#next-question").hide();
 }
 
-function updateQuestionNum() {
-  let count = 0;
-  count += 1;
-  $('.question-number').text(count);
-}
 
 
 function handleAnswer() {
-  //user click the radio button to select answer.
-  //store that in a variable
-  
   $('.questionBox').on('click', '.submitButton', function(event) {
     event.preventDefault();
-    
-    let index = 0;
+
     let selected = $('input[name=choice]:checked').val();
+    console.log(selected);
     let correct = STORE[index].answer;
     
     if (!selected) {
       alert("Choose an option");
       return;
     }
-    
     if(selected === correct) {
-      $(document.getElementByID(selected)).text('You got it right!');
+      $('input[name=choice]:checked').closest('label').append('<div class="right-answer">You got it right!</div>');
     }
     else {
-      $(document.getElementByID(selected)).text('You got it wrong!');
+      $('input[name=choice]:checked').closest('label').append(`<div class="wrong-answer">You got it wrong! <br>The answer is "${STORE[index].answer}"</br></div>`);
     }
     $('#answer').hide();
     $("input[type=radio]").attr('disabled', true);
@@ -74,17 +65,27 @@ function handleAnswer() {
 }
 
 
-
-function handleRestartQuiz() {
-
+function handleNextQuestion() {
+  $('.questionBox').on('click', '#next-question', function(event) {
+    if((index != STORE.length)) {
+      //This means that the user tried all questions
+      //Get the result page
+      displayResults();
+    }
+    else {
+      //This means that we are moving to next question
+      qNum++;
+      index++;
+      renderQuestion();
+    }
+  });
 }
 
-//finalScore()?
-//determines final score and feedback at the end of the quiz
 
 function makeQuiz() {
   handleStartQuiz();
   handleAnswer();
+  handleNextQuestion();
 
 }
 
