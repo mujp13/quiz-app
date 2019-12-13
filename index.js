@@ -1,4 +1,5 @@
 let qNum = 1;
+let questNum =0;
 let index = 0;
 let result = 0;
 
@@ -12,12 +13,15 @@ function handleStartQuiz() {
   //generateQuestion();
   $('.main-page').on('click', '.startButton', function(event) {
     $('.main-page').hide();
+    $('.question-number').text(qNum);
     renderQuestion();
   });
 
 }
 
 function renderQuestion() {
+
+  
   
   const questionHtml = $(`
       <div class="question">
@@ -31,11 +35,15 @@ function renderQuestion() {
           <label>
               <input type="radio" name="choice" id="d" value="${STORE[index].options[3]}"> ${STORE[index].options[3]} </label>
           <input type="button" value="submit" id="answer" class="submitButton button">
-          <button type ="button" id="next-question" tabindex="6"> Next Q's</button>
+          <button type ="button" id="next-question" tabindex="6"> Next </button>
       </div>
   `);
+
    $('.questionBox').html(questionHtml);
-   $("#next-question").hide();
+   $('#next-question').hide();
+   questNum++;
+   $('.question-number').text(questNum);
+
 }
 
 
@@ -61,31 +69,49 @@ function handleAnswer() {
     $('#answer').hide();
     $("input[type=radio]").attr('disabled', true);
     $('#next-question').show();
+ 
   });
 }
 
 
 function handleNextQuestion() {
   $('.questionBox').on('click', '#next-question', function(event) {
-    if((index != STORE.length)) {
+    if((index === STORE.length)) {
       //This means that the user tried all questions
       //Get the result page
       displayResults();
     }
     else {
-      //This means that we are moving to next question
       qNum++;
-      index++;
+      index++;  
       renderQuestion();
     }
+
+    
   });
 }
 
+function displayResults() {
+  let resultHtml = $(`<section class="result-page">
+    <p> Your score is 5/5 100%</p>
+    <div class="result">
+      <button type="button" id="restart" class="restartButton button">Restart Quiz</button>
+    </div>  
+    </section>`);
+  $('main').html(resultHtml);
+}
+
+function restartQuiz() {
+  $('main').on('click','#restart', function(event) {
+    renderQuestion();
+  });
+}
 
 function makeQuiz() {
   handleStartQuiz();
   handleAnswer();
   handleNextQuestion();
+  restartQuiz();
 
 }
 
