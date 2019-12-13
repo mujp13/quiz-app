@@ -29,7 +29,7 @@ html {
   
 }
 
-.button {
+.button, #next-question {
   margin-left: auto;
   margin-right: auto;
   height: 3em;
@@ -42,8 +42,11 @@ html {
 
 
 
+
 .button:hover,
-.button:active {
+.button:active,
+#next-question:hover,
+#next-question:active {
   background-color: blue;
   color: #ffd700;
   border: 0.1em #371d0d solid;

@@ -2,7 +2,7 @@ function handleStartQuiz() {
   //Create an event listener for clicking on "Start Quiz" button.
   //When user clicks it, the user will go to 1st question.
   //generateQuestion();
-  $('.main-page').on("click", '.startButton', function(event) {
+  $('.main-page').on('click', '.startButton', function(event) {
     $('.main-page').hide();
     renderQuestion();
     updateQuestionNum();
@@ -19,18 +19,14 @@ function renderQuestion() {
       <div class="question">
           <p><strong>Q${num}</strong>: ${STORE[currentQuestion].question}</p>
           <label>
-              <input type="radio" name="choice" value="a" required>${STORE[currentQuestion].options[0]}</label>
-              <div class="hidden"></div>
+              <input type="radio" name="choice" id="a" required>${STORE[currentQuestion].options[0]}</label>
           <label>
-              <input type="radio" name="choice" value="b">${STORE[currentQuestion].options[1]}</label>
-              <div class="hidden"></div>
+              <input type="radio" name="choice" id="b">${STORE[currentQuestion].options[1]}</label>
           <label>
-              <input type="radio" name="choice" value="c">${STORE[currentQuestion].options[2]}</label>
-              <div class="hidden"></div>
+              <input type="radio" name="choice" id="c">${STORE[currentQuestion].options[2]}</label>
           <label>
-              <input type="radio" name="choice" value="d">${STORE[currentQuestion].options[3]}</label>
-              <div class="hidden"></div>
-          <input type="submit" id="answer" class="submitButton button">
+              <input type="radio" name="choice" id="d">${STORE[currentQuestion].options[3]}</label>
+          <input type="button" value="submit" id="answer" class="submitButton button">
           <button type ="button" id="next-question" tabindex="6"> Next Q's</button>
       </div>
   `);
@@ -52,30 +48,31 @@ function updateQuestionNum() {
 function handleAnswer() {
   //user click the radio button to select answer.
   //store that in a variable
-  $('.questionBox').on("submit", '.question', function(event) {
+  
+  $('.questionBox').on('click', '.submitButton', function(event) {
     event.preventDefault();
     
-    let selected = $('input:checked').val();
-    let correct = currentQuestion.answer;
+    let index = 0;
+    let selected = $('input[name=choice]:checked').val();
+    let correct = STORE[index].answer;
     
-    //User gets the correct answer
+    if (!selected) {
+      alert("Choose an option");
+      return;
+    }
+    
     if(selected === correct) {
-      $('.hidden').text('You got it right!');
+      $(document.getElementByID(selected)).text('You got it right!');
     }
     else {
-      $('.hidden').text('You got it right!');
+      $(document.getElementByID(selected)).text('You got it wrong!');
     }
-    //$('#answer').hide();
-    //$("input[type=radio]").attr('disabled', true);
-    //$('#next-question').show();
+    $('#answer').hide();
+    $("input[type=radio]").attr('disabled', true);
+    $('#next-question').show();
   });
 }
 
-
-
-function nextQuestionDecision() {
-
-}
 
 
 function handleRestartQuiz() {
