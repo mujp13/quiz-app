@@ -88,6 +88,25 @@ function handleNextQuestion() {
   });
 }
 
+function resetVars() {
+  qNum = 1;
+  questNum = 0;
+  index = 0;
+  result = 0;
+  score = 0;
+  $('.question-number').text('0');
+  $('.score').text('0/0');
+}
+
+function restartQuiz() {
+  $('.result-page').on('click', '.restartButton', function(event) {
+    resetVars();
+    renderQuestion();
+  });
+}
+
+
+
 function displayResults() {
   let grade = score/qNum * 100;
   let resultText = 0;
@@ -105,29 +124,17 @@ function displayResults() {
       <button type="button" id="restart" class="restartButton button">Restart Quiz</button>
     </div>  
     </section>`);
-  $('main').html(resultHtml);
+  $('.questionBox').html(resultHtml);
+  restartQuiz();
 }
 
-function restartQuiz() {
-  $('.result').on('click', '.restartButton', function(event) {
-    resetVars();
-    renderQuestion();
-  });
-}
 
-function resetVars() {
-  qNum = 1;
-  questNum = 0;
-  index = 0;
-  result = 0;
-  score = 0;
-}
 
 function makeQuiz() {
   handleStartQuiz();
   handleAnswer();
   handleNextQuestion();
-  restartQuiz();
+  
 }
 
 $(makeQuiz);
